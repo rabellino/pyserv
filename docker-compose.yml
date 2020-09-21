@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+    eventcriteria:
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+            # set arguments from global .env file
+            args:
+                maintainer: $maintainer
+        ports:
+            - ${service_port}:8080
+        networks:
+            - pyserv
+        # tag the image
+        image: python.service/hello:1.0
+        container_name: pyserv_hello
+# connect to container network
+networks:
+    pyserv:
+        name: pyserv
